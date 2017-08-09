@@ -144,11 +144,13 @@ public class UrlList extends ListActivity {
                 saveList(v.getContext(), listItems, durations);
 
                 editDuration.setText( Integer.toString( DEFAULT_DURATION ) );
+                editDuration.setSelection(editDuration.getText().length());
 
                 //Delete the edit box to be ready to write another URL
                 editUrl.setText("http://");
                 //Focus to the end of the text
                 editUrl.setSelection(editUrl.getText().length());
+                editUrl.requestFocus();
             }
         }
         //List changed, notify the adapter to map it on the ListView
