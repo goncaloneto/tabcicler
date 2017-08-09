@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,7 +21,8 @@ public class ImmersiveWebView extends AppCompatActivity {
     private WebView mWebView;
     private int i = 0;
     private List<String> urls;
-    //default
+    private List<String> durations;
+    private final int DEFAULT_DURATION = 10;
     private int duration;
     CountDownTimer mTimer;
 
@@ -35,6 +37,18 @@ public class ImmersiveWebView extends AppCompatActivity {
         mWebView.loadUrl(urls.get(i));
     }
 
+    public int getDelay(){
+        int delay;
+
+        try{
+            delay = Integer.parseInt( durations.get(i) );
+        } catch( NumberFormatException e ) {
+            Log.e( this.toString(), "Invalid Duration. " + e.getMessage() );
+            return DEFAULT_DURATION * 1000;
+        }
+        return delay * 1000;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -42,7 +56,18 @@ public class ImmersiveWebView extends AppCompatActivity {
 
         Intent intent = getIntent();
         urls = (ArrayList<String>) intent.getStringArrayListExtra( "list" );
-        duration = intent.getIntExtra("duration",10);
+        durations = (ArrayList<String>) intent.getStringArrayListExtra( "durationList" );
+        duration = intent.getIntExtra("duration", DEFAULT_DURATION);
+
+        Log.i(this.toString(), "######## ListItems: #########");
+        for(String s : urls){
+            Log.i(this.toString(), s);
+        }
+
+        Log.i(this.toString(), "######## Duration List: #########");
+        for(String s : durations){
+            Log.i(this.toString(), s);
+        }
 
         mWebView = new WebView( this );
 
@@ -77,7 +102,6 @@ public class ImmersiveWebView extends AppCompatActivity {
         }
 
         final Handler handler = new Handler();
-        final int delay = duration * 1000; //milliseconds
 
         handler.postDelayed(new Runnable(){
             public void run(){
@@ -91,9 +115,9 @@ public class ImmersiveWebView extends AppCompatActivity {
                         | WebView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                         | WebView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | WebView.SYSTEM_UI_FLAG_IMMERSIVE);
-                handler.postDelayed( this, delay );
+                handler.postDelayed( this, getDelay() );
             }
-        }, delay );
+        }, getDelay() );
 
 
         setContentView( mWebView );

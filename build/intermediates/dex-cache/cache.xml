@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/gmneto/AndroidStudioProjects/tabCicler/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="9cf7f511fc6b94db9272d9db8d6d480a6bc4aa94">
-        <dex dex="/Users/gmneto/AndroidStudioProjects/tabCicler/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_5a99b079a20a90d14a88802ff70f35ed12b0211b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/gmneto/AndroidStudioProjects/tabCicler/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/gmneto/AndroidStudioProjects/tabCicler/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_42bec8ccdfb52d7e61dde3fcff81e1d9d81b7127/classes.dex" />
+        <dex dex="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_33da18b26927218b928fc83c1142a13f7e4cbe22/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="23d2101c3c0d36c4bb4d567280006038b885c86e">
+        <dex dex="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c614503fc459ace3fa0969afb6c8ce5314270778/classes.dex" />
     </item>
 
 </items>
