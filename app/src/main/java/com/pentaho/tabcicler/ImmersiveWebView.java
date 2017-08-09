@@ -23,8 +23,6 @@ public class ImmersiveWebView extends AppCompatActivity {
     private List<String> urls;
     private List<String> durations;
     private final int DEFAULT_DURATION = 10;
-    private int duration;
-    CountDownTimer mTimer;
 
     public void nextUrl(){
 
@@ -57,17 +55,6 @@ public class ImmersiveWebView extends AppCompatActivity {
         Intent intent = getIntent();
         urls = (ArrayList<String>) intent.getStringArrayListExtra( "list" );
         durations = (ArrayList<String>) intent.getStringArrayListExtra( "durationList" );
-        duration = intent.getIntExtra("duration", DEFAULT_DURATION);
-
-        Log.i(this.toString(), "######## ListItems: #########");
-        for(String s : urls){
-            Log.i(this.toString(), s);
-        }
-
-        Log.i(this.toString(), "######## Duration List: #########");
-        for(String s : durations){
-            Log.i(this.toString(), s);
-        }
 
         mWebView = new WebView( this );
 

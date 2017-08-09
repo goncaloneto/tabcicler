@@ -38,10 +38,8 @@ public class UrlList extends ListActivity {
     //Defining a string adapter which will handle the data of the listview
     ArrayAdapter<String> adapter;
 
-    //File to save/load URLs List
-    private String filename = "UrlFile";
-
-    private String secondFilename = "UrlDurationFile";
+    //File to save/load URLs and durations Lists
+    private String filename = "UrlDurationFile";
 
     private final int DEFAULT_DURATION = 10;
 
@@ -53,7 +51,7 @@ public class UrlList extends ListActivity {
         Map<String,ArrayList<String>> map;
 
         //Read File to load the list
-        map = loadListUrls(this);
+        map = loadLists(this);
 
         listItems = map.get("UrlList");
         durations = map.get("DurationList");
@@ -84,17 +82,6 @@ public class UrlList extends ListActivity {
                     myIntent.putExtra("list", listItems);
                     myIntent.putExtra("durationList", durations);
 
-                    //Set the duration from the edit element
-                    try {
-                        duration = Integer.parseInt(((EditText) findViewById(R.id.duration)).getText().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        duration = DEFAULT_DURATION;
-                    }
-
-                    //Send the duration to the WebView Activity
-                    myIntent.putExtra("duration", duration);
-
                     //Start WebView Activity
                     UrlList.this.startActivity(myIntent);
                 } else {
@@ -110,7 +97,7 @@ public class UrlList extends ListActivity {
             public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
                 listItems.remove(pos);
                 durations.remove(pos);
-                saveList(v.getContext(), listItems);
+                saveLists(v.getContext(), listItems, durations);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -141,7 +128,7 @@ public class UrlList extends ListActivity {
 
                 durations.add(duration);
 
-                saveList(v.getContext(), listItems, durations);
+                saveLists(v.getContext(), listItems, durations);
 
                 editDuration.setText( Integer.toString( DEFAULT_DURATION ) );
                 editDuration.setSelection(editDuration.getText().length());
@@ -158,67 +145,11 @@ public class UrlList extends ListActivity {
 
     }
 
-    public ArrayList<String> loadList(Context context) {
-        Log.i(this.toString(), "Reading file...");
-        ArrayList<String> list = new ArrayList<String>();
-        String filePath = context.getFilesDir().getPath().toString() + "/" + filename;
-        FileInputStream inputStream;
-        String url;
-
-        try {
-            inputStream = new FileInputStream(filePath);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            while ((url = reader.readLine()) != null) {
-                list.add(url);
-            }
-
-            inputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(this.toString(), e.getMessage());
-        }
-        return list;
-    }
-
-    public void saveList(Context context, ArrayList<String> list) {
-        Log.i(this.toString(), "Writing to file...");
-        FileOutputStream outputStream;
-        String filePath = context.getFilesDir().getPath().toString() + "/" + filename;
-
-        try {
-            PrintWriter pw = new PrintWriter(new FileOutputStream(filePath));
-            for (String url : list)
-                pw.println(url);
-            pw.close();
-        } catch (FileNotFoundException f) {
-
-            Log.e(this.toString(), f.getMessage());
-            File file = new File(filePath);
-
-            try {
-                file.createNewFile();
-                PrintWriter pw = new PrintWriter(new FileOutputStream(filePath));
-                for (String url : list)
-                    pw.println(url);
-                pw.close();
-                Log.e(this.toString(), "File created at " + filePath + " - " + file.exists());
-            } catch (Exception e) {
-                Log.e(this.toString(), e.getMessage());
-                e.printStackTrace();
-            }
-
-        } catch (Exception e) {
-            Log.e(this.toString(), e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    public Map<String,ArrayList<String>> loadListUrls(Context context) {
+    public Map<String,ArrayList<String>> loadLists(Context context) {
         Log.i(this.toString(), "Reading file...");
         ArrayList<String> list = new ArrayList<String>();
         ArrayList<String> durationList = new ArrayList<String>();
-        String filePath = context.getFilesDir().getPath().toString() + "/" + secondFilename;
+        String filePath = context.getFilesDir().getPath().toString() + "/" + filename;
         FileInputStream inputStream;
         String line;
         Map<String,ArrayList<String>> map = new HashMap<>();
@@ -250,10 +181,10 @@ public class UrlList extends ListActivity {
         return map;
     }
 
-    public void saveList(Context context, ArrayList<String> list, ArrayList<String> durationList) {
+    public void saveLists(Context context, ArrayList<String> list, ArrayList<String> durationList) {
         Log.i(this.toString(), "Writing to file...");
         FileOutputStream outputStream;
-        String filePath = context.getFilesDir().getPath().toString() + "/" + secondFilename;
+        String filePath = context.getFilesDir().getPath().toString() + "/" + filename;
 
         try {
             PrintWriter pw = new PrintWriter(new FileOutputStream(filePath));
