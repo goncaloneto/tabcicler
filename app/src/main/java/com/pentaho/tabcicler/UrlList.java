@@ -36,7 +36,7 @@ public class UrlList extends ListActivity {
 
 
     //Defining a string adapter which will handle the data of the listview
-    ArrayAdapter<String> adapter;
+    MyAdapter myAdapter;
 
     //File to save/load URLs and durations Lists
     private String filename = "UrlDurationFile";
@@ -56,20 +56,11 @@ public class UrlList extends ListActivity {
         listItems = map.get("UrlList");
         durations = map.get("DurationList");
 
-        Log.i(this.toString(), "######## ListItems: #########");
-        for(String s : listItems){
-            Log.i(this.toString(), s);
-        }
-
-        Log.i(this.toString(), "######## Duration List: #########");
-        for(String s : durations){
-            Log.i(this.toString(), s);
-        }
-
         super.onCreate(icicle);
         setContentView(R.layout.activity_url_list);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
-        setListAdapter(adapter);
+
+        myAdapter = new MyAdapter(this, listItems, durations);
+        setListAdapter(myAdapter);
 
         //When clicking on start button
         final Button start = (Button) findViewById(R.id.startBtn);
@@ -98,7 +89,7 @@ public class UrlList extends ListActivity {
                 listItems.remove(pos);
                 durations.remove(pos);
                 saveLists(v.getContext(), listItems, durations);
-                adapter.notifyDataSetChanged();
+                myAdapter.notifyDataSetChanged();
             }
         });
 
@@ -141,7 +132,7 @@ public class UrlList extends ListActivity {
             }
         }
         //List changed, notify the adapter to map it on the ListView
-        adapter.notifyDataSetChanged();
+        myAdapter.notifyDataSetChanged();
 
     }
 
