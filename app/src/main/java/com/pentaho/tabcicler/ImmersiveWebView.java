@@ -39,7 +39,8 @@ public class ImmersiveWebView extends AppCompatActivity {
         int delay;
 
         try{
-            delay = Integer.parseInt( durations.get(i) );
+            //Get the first word of the string
+            delay = Integer.parseInt( durations.get(i).split(" ")[0] );
         } catch( NumberFormatException e ) {
             Log.e( this.toString(), "Invalid Duration. " + e.getMessage() );
             return DEFAULT_DURATION * 1000;

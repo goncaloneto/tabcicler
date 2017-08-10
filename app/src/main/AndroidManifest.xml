@@ -16,9 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ImmersiveWebView">
-
-        </activity>
+        <activity android:name=".ImmersiveWebView"></activity>
+        <activity android:name=".EntryConfig"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

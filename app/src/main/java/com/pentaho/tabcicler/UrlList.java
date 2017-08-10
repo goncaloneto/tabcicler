@@ -1,5 +1,6 @@
 package com.pentaho.tabcicler;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -86,13 +86,34 @@ public class UrlList extends ListActivity {
         ListView mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
-                listItems.remove(pos);
-                durations.remove(pos);
-                saveLists(v.getContext(), listItems, durations);
-                myAdapter.notifyDataSetChanged();
+                Intent intent = new Intent(UrlList.this, EntryConfig.class);
+                intent.putExtra( "position", pos );
+                intent.putExtra( "url", listItems.get(pos) );
+                startActivityForResult( intent, 1 );
             }
         });
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == -1) {
+            int pos = data.getIntExtra("position",0);
+            listItems.remove(pos);
+            durations.remove(pos);
+            myAdapter.notifyDataSetChanged();
+            saveLists( this, listItems, durations);
+        }
+
+        if (resultCode == 1) {
+            int pos = data.getIntExtra("position",0);
+            String newDuration = data.getStringExtra("duration");
+            durations.set(pos, newDuration + " Seconds");
+            myAdapter.notifyDataSetChanged();
+            saveLists( this, listItems, durations);
+        }
     }
 
     //Add URLs to the List
@@ -117,11 +138,10 @@ public class UrlList extends ListActivity {
                 //Add Url to the list and save it in the file
                 listItems.add(url);
 
-                durations.add(duration);
+                durations.add(duration + " Seconds");
 
                 saveLists(v.getContext(), listItems, durations);
 
-                editDuration.setText( Integer.toString( DEFAULT_DURATION ) );
                 editDuration.setSelection(editDuration.getText().length());
 
                 //Delete the edit box to be ready to write another URL
