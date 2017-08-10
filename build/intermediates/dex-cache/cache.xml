@@ -2,22 +2,31 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/Users/gmneto/.android/build-cache/305c1c4794b33332c2e1b6adb53b1c257067aff6/output/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="26.0.1"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_33da18b26927218b928fc83c1142a13f7e4cbe22/classes.dex" />
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/pre-dexed/debug/classes_1481ea224d43097f84ce7a418c465943e1eeab96.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/Users/gmneto/.android/build-cache/8a4133a96f7897def962c0b224f20094b6a0fe2f/output/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="26.0.1"
-        sha1="23d2101c3c0d36c4bb4d567280006038b885c86e">
-        <dex dex="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c614503fc459ace3fa0969afb6c8ce5314270778/classes.dex" />
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/pre-dexed/debug/classes_70a6d2d88259c04637762c8c32dd62ae8cd5140d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gmneto/.android/build-cache/a605cbff69584eba6e5d01c77e768dbd17a8f412/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/Users/gmneto/AndroidStudioProjects/tabcicler/app/build/intermediates/pre-dexed/debug/classes_b9ac9f5113a2c9678e9180a1aaf942af40ac10ed.jar" />
     </item>
 
 </items>

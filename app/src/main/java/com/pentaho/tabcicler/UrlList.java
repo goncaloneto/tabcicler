@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -62,9 +63,9 @@ public class UrlList extends ListActivity {
         myAdapter = new MyAdapter(this, listItems, durations);
         setListAdapter(myAdapter);
 
-        //When clicking on start button
-        final Button start = (Button) findViewById(R.id.startBtn);
-        start.setOnClickListener(new View.OnClickListener() {
+        //When clicking on play button
+        final FloatingActionButton play = (FloatingActionButton) findViewById(R.id.playBtn);
+        play.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //If the list is not empty
                 if (listItems.size() > 0) {
