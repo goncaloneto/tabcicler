@@ -8,6 +8,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +33,7 @@ public class EntryConfig extends Activity {
         TextView title = (TextView) findViewById(R.id.urlConfigTitle);
         Button delete = (Button) findViewById(R.id.delete);
         Button save = (Button) findViewById(R.id.save);
-        Button xButton = (Button) findViewById(R.id.xButton);
+        FloatingActionButton xButton = (FloatingActionButton) findViewById(R.id.xButton);
         final EditText duration = (EditText) findViewById(R.id.editDuration);
 
         title.setText(url);
