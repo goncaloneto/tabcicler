@@ -135,8 +135,6 @@ public class UrlList extends ListActivity {
         // Gets the clipboard as text.
         pasteData = item.getText().toString();
 
-        Log.i( "pasteData","DATA: " + pasteData );
-
         // If the string contains data, then the paste operation is done
         if (pasteData != null) {
             if( !parsePastedData(pasteData) ){
@@ -152,8 +150,13 @@ public class UrlList extends ListActivity {
     private boolean parsePastedData(String pasteData) {
         String[] splited = pasteData.replace(" ","").split("[,;\n]");
 
-        List<String> entries = Arrays.asList(splited);
+        ArrayList<String> entries = new ArrayList<>(Arrays.asList(splited));
         String entrie;
+
+        for(int i=0; i<entries.size() ; i++){
+            if(entries.get(i).isEmpty())
+                entries.remove(i);
+        }
 
         boolean hasValidEntries = false;
 
@@ -164,18 +167,18 @@ public class UrlList extends ListActivity {
             }
 
             if( entrie.toLowerCase().startsWith( "http://" ) ){
-                Log.i("TAG",entrie);
+
                 if( !(entries.size() >= i + 1) ){
                     continue;
                 }
 
                 String next = entries.get( i + 1 );
-                Log.i("TAG",next);
+
                 if( isInteger(next) ){
                     int d = Integer.parseInt(next);
                     if( d >= 0 ){
                         listItems.add(entrie);
-                        durations.add(next);
+                        durations.add(next + " Seconds");
                         saveLists(getBaseContext(),listItems,durations);
                         myAdapter.notifyDataSetChanged();
 

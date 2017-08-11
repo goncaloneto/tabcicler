@@ -48,7 +48,7 @@
             android:id="@+id/tutText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Copy your URLs and durations separated by comma, semicolon or by lines as the following examples show:"
+            android:text="Copy your URLs and durations separated by semicolon, comma or by lines as the following examples show:"
             android:textSize="20dp"
             android:padding="15dp"
             android:layout_below="@+id/tutTitle"
