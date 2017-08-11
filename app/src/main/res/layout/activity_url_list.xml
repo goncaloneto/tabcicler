@@ -64,20 +64,29 @@
         android:layout_height="match_parent">
 
         <ListView
-            android:id="@android:id/list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:drawSelectorOnTop="false"
-            />
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:drawSelectorOnTop="false"
+        />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/playBtn"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_gravity="end|bottom"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/play" />
+        android:id="@+id/playBtn"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/play" />
+
+        <android.support.design.widget.FloatingActionButton
+        android:id="@+id/importBtn"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_gravity="start|bottom"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/importarrow" />
 
     </FrameLayout>
 

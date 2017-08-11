@@ -83,6 +83,18 @@ public class UrlList extends ListActivity {
             }
         });
 
+        //When clicking on import button
+        final FloatingActionButton importBtn = (FloatingActionButton) findViewById(R.id.importBtn);
+        importBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent()
+                        .setType("*/*")
+                        .setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), 10);
+            }
+        });
+
         //Delete item of the list when clicking it
         ListView mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
