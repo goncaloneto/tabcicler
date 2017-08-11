@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:fillViewport="false"
     android:background="@color/colorPrimaryDark">
@@ -19,16 +20,29 @@
             android:text="Hint"
             android:textSize="40dp"
             android:paddingLeft="15dp"
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textColor="@android:color/white"
             />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/xButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorAccent"
+            android:gravity="center_vertical|center_horizontal"
+            android:src="@drawable/close"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="mini"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:src="@drawable/info"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="17dp"/>
 
         <TextView
             android:id="@+id/tutText1"
@@ -43,28 +57,31 @@
 
         <ImageView
             android:id="@+id/tut1"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="105dp"
             android:src="@drawable/newline"
             android:layout_below="@+id/tutText1"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="15dp"
             />
 
         <ImageView
             android:id="@+id/tut2"
-            android:layout_width="wrap_content"
-            android:layout_height="105dp"
-            android:src="@drawable/newline"
+            android:layout_width="300dp"
+            android:layout_height="75dp"
+            android:src="@drawable/semicolon"
             android:layout_below="@+id/tut1"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="15dp"
             />
 
         <ImageView
             android:id="@+id/tut3"
-            android:layout_width="wrap_content"
-            android:layout_height="105dp"
-            android:src="@drawable/newline"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:src="@drawable/comma"
             android:layout_below="@+id/tut2"
+            android:layout_marginLeft="15dp"
             />
 
         <TextView
@@ -79,11 +96,11 @@
             android:layout_below="@+id/tut3"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/tutorialpaste"
             android:layout_below="@+id/tutText2"
-            android:paddingLeft="15dp"
+            android:layout_marginLeft="15dp"
             />
 
     </RelativeLayout>
