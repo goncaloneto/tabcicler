@@ -2,11 +2,16 @@ package com.pentaho.tabcicler;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,7 +27,9 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,6 +90,14 @@ public class UrlList extends ListActivity {
             }
         });
 
+        //When clicking on paste button
+        final FloatingActionButton pasteBtn = (FloatingActionButton) findViewById(R.id.pasteBtn);
+        pasteBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                pasteData();
+            }
+        });
+
         //Delete item of the list when clicking it
         ListView mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,24 +111,108 @@ public class UrlList extends ListActivity {
 
     }
 
+    private void pasteData() {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        String pasteData = "";
+
+
+        // If the clipboard doesn't contain data, return. TODO send an error message
+        // If it does contain data, decide if you can handle the data.
+        if (!(clipboard.hasPrimaryClip())) {
+            Log.e("pasteData", "Clipboard doesn't contain data!");
+            return;
+        } else if (!(clipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN))) {
+            // Clipboard has data but it is not plain text
+            Log.e("pasteData", "Clipboard has data but it is not plain text!");
+            return;
+        } else {
+            // Clipboard contains plain text.
+            Log.i("pasteData", "Clipboard contains plain text!");
+        }
+
+        // Examines the item on the clipboard. If getText() does not return null, the clip item contains the
+        // text. Assumes that this application can only handle one item at a time.
+        ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+
+        // Gets the clipboard as text.
+        pasteData = item.getText().toString();
+
+        Log.i( "pasteData","DATA: " + pasteData );
+
+        // If the string contains data, then the paste operation is done
+        if (pasteData != null) {
+            parsePastedData(pasteData);
+        } else {
+            //https://developer.android.com/guide/topics/text/copy-paste.html
+            Log.e("pasteData", "Pasted data is probably an URI. See https://developer.android.com/guide/topics/text/copy-paste.html to learn how to handle it");
+        }
+
+    }
+
+    private void parsePastedData(String pasteData) {
+        String[] splited = pasteData.split("[,;\n]");
+
+        List<String> entries = Arrays.asList(splited);
+        String entrie;
+
+        for( int i = 0 ; i < entries.size() ; i++ ) {
+            entrie = entries.get( i );
+            if ( entrie.isEmpty() ) {
+                continue;
+            }
+
+            if( entrie.toLowerCase().startsWith( "http://" ) ){
+                Log.i("TAG",entrie);
+                if( !(entries.size() >= i + 1) ){
+                    continue;
+                }
+
+                String next = entries.get( i + 1 );
+                Log.i("TAG",next);
+                if( isInteger(next) ){
+                    int d = Integer.parseInt(next);
+                    if( d >= 0 ){
+                        listItems.add(entrie);
+                        durations.add(next);
+                        saveLists(getBaseContext(),listItems,durations);
+                        myAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isInteger(String s){
+        try{
+            Integer.parseInt(s);
+        } catch (NumberFormatException e){
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == -1) {
-            int pos = data.getIntExtra("position",0);
-            listItems.remove(pos);
-            durations.remove(pos);
-            myAdapter.notifyDataSetChanged();
-            saveLists( this, listItems, durations);
-        }
+        if( requestCode == 1 ){
 
-        if (resultCode == 1) {
-            int pos = data.getIntExtra("position",0);
-            String newDuration = data.getStringExtra("duration");
-            durations.set(pos, newDuration + " Seconds");
-            myAdapter.notifyDataSetChanged();
-            saveLists( this, listItems, durations);
+            if (resultCode == -1) {
+                int pos = data.getIntExtra("position",0);
+                listItems.remove(pos);
+                durations.remove(pos);
+                myAdapter.notifyDataSetChanged();
+                saveLists( this, listItems, durations);
+            }
+
+            if (resultCode == 1) {
+                int pos = data.getIntExtra("position",0);
+                String newDuration = data.getStringExtra("duration");
+                durations.set(pos, newDuration + " Seconds");
+                myAdapter.notifyDataSetChanged();
+                saveLists( this, listItems, durations);
+            }
+
         }
     }
 
@@ -128,7 +227,7 @@ public class UrlList extends ListActivity {
         if (!url.isEmpty()) {
 
             //If URL doesn't contain 'http://' send a Toast error message
-            if (!url.contains("http://")) {
+            if (!url.toLowerCase().contains("http://")) {
                 Toast.makeText(v.getContext(), "Malformed URL. URL must start with 'http://'.", Toast.LENGTH_SHORT).show();
             } else {
 
