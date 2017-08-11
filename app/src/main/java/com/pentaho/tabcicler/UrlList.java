@@ -115,16 +115,14 @@ public class UrlList extends ListActivity {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         String pasteData = "";
 
-
-        // If the clipboard doesn't contain data, return. TODO send an error message
         // If it does contain data, decide if you can handle the data.
         if (!(clipboard.hasPrimaryClip())) {
             Log.e("pasteData", "Clipboard doesn't contain data!");
-            return;
+            startActivity(new Intent(UrlList.this, PasteTutorial.class));
         } else if (!(clipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN))) {
             // Clipboard has data but it is not plain text
             Log.e("pasteData", "Clipboard has data but it is not plain text!");
-            return;
+            startActivity(new Intent(UrlList.this, PasteTutorial.class));
         } else {
             // Clipboard contains plain text.
             Log.i("pasteData", "Clipboard contains plain text!");
@@ -141,7 +139,9 @@ public class UrlList extends ListActivity {
 
         // If the string contains data, then the paste operation is done
         if (pasteData != null) {
-            parsePastedData(pasteData);
+            if( !parsePastedData(pasteData) ){
+                startActivity(new Intent(UrlList.this, PasteTutorial.class));
+            }
         } else {
             //https://developer.android.com/guide/topics/text/copy-paste.html
             Log.e("pasteData", "Pasted data is probably an URI. See https://developer.android.com/guide/topics/text/copy-paste.html to learn how to handle it");
@@ -149,11 +149,13 @@ public class UrlList extends ListActivity {
 
     }
 
-    private void parsePastedData(String pasteData) {
-        String[] splited = pasteData.split("[,;\n]");
+    private boolean parsePastedData(String pasteData) {
+        String[] splited = pasteData.replace(" ","").split("[,;\n]");
 
         List<String> entries = Arrays.asList(splited);
         String entrie;
+
+        boolean hasValidEntries = false;
 
         for( int i = 0 ; i < entries.size() ; i++ ) {
             entrie = entries.get( i );
@@ -176,10 +178,14 @@ public class UrlList extends ListActivity {
                         durations.add(next);
                         saveLists(getBaseContext(),listItems,durations);
                         myAdapter.notifyDataSetChanged();
+
+                        hasValidEntries = true;
                     }
                 }
             }
         }
+
+        return hasValidEntries;
     }
 
     private boolean isInteger(String s){

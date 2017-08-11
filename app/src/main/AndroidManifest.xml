@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".ImmersiveWebView"></activity>
         <activity android:name=".EntryConfig"></activity>
+        <activity android:name=".PasteTutorial"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:fillViewport="false"
+    android:background="@color/colorPrimaryDark">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/tutTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hint"
+            android:textSize="40dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:textColor="@android:color/white"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:src="@drawable/info"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:id="@+id/tutText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Copy your URLs and durations separated by comma, semicolon or by lines as the following examples show:"
+            android:textSize="20dp"
+            android:padding="15dp"
+            android:layout_below="@+id/tutTitle"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/tut1"
+            android:layout_width="wrap_content"
+            android:layout_height="105dp"
+            android:src="@drawable/newline"
+            android:layout_below="@+id/tutText1"
+            android:layout_marginBottom="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/tut2"
+            android:layout_width="wrap_content"
+            android:layout_height="105dp"
+            android:src="@drawable/newline"
+            android:layout_below="@+id/tut1"
+            android:layout_marginBottom="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/tut3"
+            android:layout_width="wrap_content"
+            android:layout_height="105dp"
+            android:src="@drawable/newline"
+            android:layout_below="@+id/tut2"
+            />
+
+        <TextView
+            android:id="@+id/tutText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="And then click the paste buttton: "
+            android:padding="15dp"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_below="@+id/tut3"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:src="@drawable/tutorialpaste"
+            android:layout_below="@+id/tutText2"
+            android:paddingLeft="15dp"
+            />
+
+    </RelativeLayout>
+
+</ScrollView>
