@@ -80,13 +80,13 @@
         android:src="@drawable/play" />
 
         <android.support.design.widget.FloatingActionButton
-        android:id="@+id/importBtn"
+        android:id="@+id/pasteBtn"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_gravity="start|bottom"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
-        android:src="@drawable/importarrow" />
+        android:src="@drawable/paste" />
 
     </FrameLayout>
 
