@@ -5,9 +5,40 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="left"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+            android:text="URL Slideshow"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="30dp"
+            android:paddingLeft="5dp"
+            android:gravity="center"
+            android:textAlignment="textStart"/>
+
+    </LinearLayout>
+    
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:padding="5dp"
         android:text="Add an URL:"/>
 
